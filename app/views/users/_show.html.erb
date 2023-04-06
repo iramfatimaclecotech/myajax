@@ -1,0 +1,72 @@
+<div id= "user-edit">
+<h4 class= "p">User_name :<%= @user.name %></h4>
+  <%= link_to "Edit", edit_user_path(@user), remote: :true,  class: 'btn btn-success bs-btn-bg: #6f8557' , data: { bs_toggle: "modal", bs_target: "#user-new" } %><br>
+    <%= link_to "Destroy", user_path(@user), data: {
+                    turbo_method: :delete,
+                    turbo_confirm: "Are you sure?"
+                  }, remote: :true, class: 'btn btn-success btn-sm' %>
+</div>
+    <div> 
+        <%#= render "posts/newpost" %>
+    </div>
+
+  <div> 
+        <%#= render "posts/showpost" %>
+  </div>
+
+
+<div class="modal fade" id="user-new" tabindex="-1" aria-labelledby="NewUserModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="NewUserModalLabel">Create New User</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div id= "edit-user">
+            </div>
+        </div>
+    </div>
+</div> 
+
+<div id= "user-update"></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div id= "new-post"> </div>
+<div> <br>
+    <%= render "posts/showpost" %>
+</div>
+
+<div> 
+    <%= render "posts/newpost" %>
+</div>
+ <div id= "user-form">
+            </div>
+<div id="user-update"></div>
+
+<style>
+.p{
+  font-size: 1rem;
+  color: #234a70;
+}
+
+</style>
+

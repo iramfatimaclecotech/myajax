@@ -1,0 +1,26 @@
+<div class= "sty">
+<h2>posts</h2>
+
+<% @user.posts.each do |post| %>
+  <p>
+    <strong>Post_name:</strong>
+    <%= post.post_name %>
+  </p>
+  <p>
+    <strong>post_details:</strong>
+    <%= post.post_details %>
+  </p>
+  
+<%= link_to "Edit_post", edit_user_post_path(@user.id, id: post.id), remote: :true %><br>
+<%= link_to "delete_post", user_post_path(@user.id, id: post.id), method: :delete,  remote: true %>
+<% end %>
+</div>
+<style>
+
+.sty {
+  font-weight: 300;
+  color: #023a20;
+}
+
+
+</style>

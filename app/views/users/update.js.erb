@@ -1,0 +1,6 @@
+<% if @user.errors.any? %>
+  $("#errorArea").html("<%= j render("error", user: @user ) %>")
+<% else %>
+   $("#userRow_<%= @user.id %>").replacewith("<%= j render("user_row", user: @user) %>");
+   $(".close-modal").click();
+<% end %>

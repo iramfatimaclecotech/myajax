@@ -1,0 +1,16 @@
+
+<div class= "font-weight: 300;">
+    <%= form_with(model: user, local: false) do |form| %>
+        <div class="modal-body">
+        <div id="errorArea"></div>
+            <div>
+                <%= form.label :name %><br>
+                <%= form.text_field :name %>
+            </div>
+        </div> 
+        <div class="modal-footer">
+            <%= form.submit  class: "btn btn-primary btn-lg" %>
+            <button type="button" class="btn btn-secondary btn-lg close-modal" data-bs-dismiss="modal">Close</button>
+        </div>  
+    <% end %>
+</div>

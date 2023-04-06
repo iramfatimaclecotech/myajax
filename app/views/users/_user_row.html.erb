@@ -1,0 +1,7 @@
+
+<center>
+    <tr id="userRow_<%= user.id %>" >
+        <td> name:<%= link_to user.name, user, class:"a", remote: :true %></td>
+        <td><%#= link_to "Edit", edit_user_path(@user), remote: :true,  class: 'btn btn-success bs-btn-bg: #6f8557' , data: { bs_toggle: "modal", bs_target: "#user-new" } %></td>
+    </tr>
+</center>

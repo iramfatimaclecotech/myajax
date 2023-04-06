@@ -1,0 +1,32 @@
+
+<center>
+<div id="edit-form">
+<h4>Article_title :<%= @article.title %></h4>
+<p> Article_body:<%= @article.body %></p>
+  <%= link_to "Edit", edit_article_path(@article), remote: true, class: 'btn btn-success btn-sm' %>
+  || <%= link_to "Destroy", article_path(@article), data: {
+                    turbo_method: :delete,
+                    turbo_confirm: "Are you sure?"
+                  }, remote: true, class: 'btn btn-success btn-sm' %>
+
+
+<div id= "destroy_article"></div>
+
+  <div id="clicked">
+    <div class="p">
+        <%= render "comments/comment" %>
+    </div>  
+  </div>
+
+  <div id= "delete-form">
+  </div> <br>
+
+  <div> <br>
+    <%= render "comments/form" %>
+  </div>
+</div>
+</center>
+<div id= "edit-comment"></div>
+<div id= "delete-form"></div>
+
+

@@ -1,0 +1,13 @@
+<h2>Comments</h2>
+<% @article.comments.each do |comment| %>
+  <p>
+    <strong>Commenter:</strong>
+    <%= comment.commenter %>
+  </p>
+  <p>
+    <strong>Comment:</strong>
+    <%= comment.body %>
+  </p>
+<%= link_to "Edit_comment", edit_article_comment_path(comment.article.id, id: comment.id), remote: true %><br>
+<%= link_to "delete_comment", article_comment_path(comment.article.id, id: comment.id), method: :delete,  remote: true %>
+<% end %>

@@ -1,0 +1,46 @@
+<center>
+<h4 class="size"> Users </h4>
+<div id= "user-edit">
+
+ <div id="userTable"></div>
+ 
+    <% @users.each do |user| %>
+       <%= render "user_row", user: user %><br>
+    <% end %><br>
+
+
+
+  <%#= link_to "New user", new_user_path,  remote: :true,  class: 'btn btn-info btn-sm' %>
+
+  <%= link_to 'New User', new_user_path, class: "btn btn-primary btn-lg " , data: { bs_toggle: "modal", bs_target: "#user-new", remote: :true } %>
+
+</center>
+
+<div class="modal fade" id="user-new" tabindex="-1" aria-labelledby="NewUserModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="NewUserModalLabel">Create New User</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div id= "user-form">
+            </div>
+        </div>
+    </div>
+</div> 
+
+<style>
+.a{
+  color: #0f5132;
+  font-style: oblique;
+  font-weight: bold;
+}
+ .c{
+    bs-btn-bg: #198754
+ }
+  .size
+  { font-size: 2.5rem;
+    color: #023a20;
+
+  }
+</style>

@@ -1,0 +1,16 @@
+<%#= form_with model: comment do |form| %>
+<%= form_with model: [ @article, @comment ] do |form| %>
+  <div>
+    <%= form.label :commenter %><br>
+    <%= form.text_field :commenter %>
+  </div>
+
+  <div>
+    <%= form.label :comment %><br>
+    <%= form.text_area :comment %><br>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
