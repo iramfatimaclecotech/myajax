@@ -1,0 +1,9 @@
+ 
+ <div id="user-edit">
+    <tr id="postRow_<%= @post.id %>" >
+     <% @user.posts.each do |post| %>
+   <td>post_name:<%= post.post_name %></td>
+   <td>post_details:<%= post.post_details %></td>
+    </tr>
+    <%end%>
+</div>

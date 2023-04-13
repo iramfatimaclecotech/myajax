@@ -1,54 +1,14 @@
+<center>
 <div id= "user-edit">
-<h4 class= "p">User_name :<%= @user.name %></h4>
-  <%= link_to "Edit", edit_user_path(@user), remote: :true,  class: 'btn btn-success bs-btn-bg: #6f8557' , data: { bs_toggle: "modal", bs_target: "#user-new" } %><br>
+<h2 >User_name :<%= @user.name %></h2>
+  <%#= link_to "Edit", edit_user_path(@user), remote: :true,  class: 'btn btn-success bs-btn-bg: #6f8557' , data: { bs_toggle: "modal", bs_target: "#user-new" } %><br>
     <%= link_to "Destroy", user_path(@user), data: {
                     turbo_method: :delete,
                     turbo_confirm: "Are you sure?"
                   }, remote: :true, class: 'btn btn-success btn-sm' %>
-</div>
-    <div> 
-        <%#= render "posts/newpost" %>
-    </div>
-
-  <div> 
-        <%#= render "posts/showpost" %>
-  </div>
 
 
-<div class="modal fade" id="user-new" tabindex="-1" aria-labelledby="NewUserModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="NewUserModalLabel">Create New User</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div id= "edit-user">
-            </div>
-        </div>
-    </div>
-</div> 
-
-<div id= "user-update"></div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+ <%#= link_to 'New post', new_user_post_path(@user), class: "btn btn-primary btn-lg " , data: { bs_toggle: "modal", bs_target: "#post-new", remote: :true } %></td>
 
 <div id= "new-post"> </div>
 <div> <br>
@@ -58,11 +18,37 @@
 <div> 
     <%= render "posts/newpost" %>
 </div>
- <div id= "user-form">
+ </center>
+  <div class="modal fade" id="editPostModal" tabindex="-1" aria-labelledby="editPostModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editPostModalLabel">Edit Post</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+          <div id="post-edit">
+        </div>
+    </div>
+  </div>
+ <div id="postRow"></div>
+
+
+<!--
+ <div class="modal fade" id="post-new" tabindex="-1" aria-labelledby="NewPostModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="NewPostModalLabel">Create New post</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-<div id="user-update"></div>
+                <div id= "user-edit">
+            </div>
+        </div>
+    </div>
+    -->
 
 <style>
+
 .p{
   font-size: 1rem;
   color: #234a70;

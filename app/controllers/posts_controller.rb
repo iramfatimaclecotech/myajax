@@ -1,4 +1,10 @@
 class PostsController < ApplicationController
+
+
+  def privacy_policy
+
+  end
+
 def create
     @user = User.find(params[:user_id])
     @post = @user.posts.create(post_params)

@@ -1,20 +1,27 @@
-<div class= "sty">
-<h2>posts</h2>
 
-<% @user.posts.each do |post| %>
-  <p>
-    <strong>Post_name:</strong>
-    <%= post.post_name %>
-  </p>
-  <p>
-    <strong>post_details:</strong>
-    <%= post.post_details %>
-  </p>
-  
-<%= link_to "Edit_post", edit_user_post_path(@user.id, id: post.id), remote: :true %><br>
-<%= link_to "delete_post", user_post_path(@user.id, id: post.id), method: :delete,  remote: true %>
-<% end %>
-</div>
+<table class="table table-success table-striped" style="width:50%" >
+  <thead  class="table-secondary" ><tr>
+      <th class="text-center" colspan="2" >Post show</th>
+   
+  </thead>
+  <tbody  class="table table-striped"  width= "500px" >
+    <% @user.posts.each do |post| %>
+      <tr>
+        <td>Post_name:</td>
+        <td ><%=post.post_name%></td>
+      </tr>
+      <tr>
+        <td>post_details:</td>
+        <td><%= post.post_details %></td>
+      </tr>
+      <tr >
+        <td><%= link_to "Edit_post", edit_user_post_path(@user.id, id: post.id),  data: { bs_toggle: "modal", bs_target: "#editPostModal", remote: :true } %></td>
+        <td><%= link_to "delete_post", user_post_path(@user.id, id: post.id), method: :delete,  remote: :true %></td>
+      </tr>
+
+    <%end%>
+  </tbody>
+</table>
 <style>
 
 .sty {
@@ -22,5 +29,10 @@
   color: #023a20;
 }
 
-
+th ,tr,td{
+  border: 1px solid black;
+  width: 500px;
+  
+}
 </style>
+

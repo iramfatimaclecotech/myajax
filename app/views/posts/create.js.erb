@@ -1,0 +1,6 @@
+<% if @user.errors.any? %>
+   $("#errorArea").html("<%= j render("error", post: @post ) %>")
+<% else %>
+   $("#postRow").prepend("<%= j render("post_rows", post: @post) %>");
+   $(".close-modal").click();
+<% end %>
