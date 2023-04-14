@@ -2,5 +2,6 @@
    $("#errorArea").html("<%= j render("error", user: @user ) %>")
 <% else %>
    $("#userTable").prepend("<%= j render("user_row", user: @user) %>");
+   $('#flash-message').html("<%= j render 'flash2' %>").fadeOut(3000);
    $(".close-modal").click();
 <% end %>

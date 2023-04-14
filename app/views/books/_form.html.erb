@@ -1,0 +1,20 @@
+<%= form_with model: book do |form| %>
+  <div >
+    <%= form.label :title %><br>
+    <%= form.text_field :title, class: "form-control", style: 'width: 300px;' %>
+    <% book.errors.full_messages_for(:title).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+    <div>
+    <div >
+    <%= form.label :isbn %><br>
+    <%= form.text_field :isbn, class: "form-control", style: 'width: 300px;' %>
+    <% book.errors.full_messages_for(:title).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+    <div>
+    <%= form.submit class: 'btn btn-success btn-sm' %>
+    <%#= link_to "form submit",  method: :put, remote: true %> 
+  </div>
+  </div>
+<% end %>

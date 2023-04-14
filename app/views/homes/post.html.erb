@@ -1,0 +1,27 @@
+<center>
+<h1>Homes#post</h1>
+<p>Find me in app/views/homes/index.html.erb</p>
+<%= form_tag homes_post_path do %>
+   <label>post_user:</label>
+   <%= select_tag :home_id, options_for_select(User.all.map{ |d| ["#{d.name}/#{d.id}", d.id]}), class: "select2_dashboard form-control"%>
+<% end %>
+
+<div id="post-id">
+    <%#= render 'homes/show', home: @home%>
+</div>
+</center>
+
+<script>
+    window.onload = function() {
+        $("#home_id").on("change", function(){
+                alert("hello");
+            });
+
+            var home_id = $('#home_id').val();
+      $.ajax({
+        url: '/homes/post_data',
+        method: 'get',
+        });
+    }
+</script>
+ 

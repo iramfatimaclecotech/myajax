@@ -10,10 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_10_055422) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_12_065013) do
   create_table "articles", force: :cascade do |t|
     t.string "title"
     t.text "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "books", force: :cascade do |t|
+    t.string "title"
+    t.string "isbn"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -27,12 +34,35 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_10_055422) do
     t.index ["article_id"], name: "index_comments_on_article_id"
   end
 
+  create_table "creators", force: :cascade do |t|
+    t.string "name"
+    t.integer "resource_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "post2s", force: :cascade do |t|
+    t.string "body"
+    t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "posts", force: :cascade do |t|
     t.string "post_name"
     t.string "post_details"
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "resources", force: :cascade do |t|
+    t.string "tag_list"
+    t.string "title"
+    t.string "discription"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "input"
   end
 
   create_table "searches", force: :cascade do |t|

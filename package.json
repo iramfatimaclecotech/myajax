@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "lodash.debounce": "^4.0.8",
     "select2": "^4.1.0-rc.0"
   }
 }

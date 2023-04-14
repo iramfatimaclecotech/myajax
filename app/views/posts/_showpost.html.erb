@@ -2,7 +2,6 @@
 <table class="table table-success table-striped" style="width:50%" >
   <thead  class="table-secondary" ><tr>
       <th class="text-center" colspan="2" >Post show</th>
-   
   </thead>
   <tbody  class="table table-striped"  width= "500px" >
     <% @user.posts.each do |post| %>
@@ -18,7 +17,6 @@
         <td><%= link_to "Edit_post", edit_user_post_path(@user.id, id: post.id),  data: { bs_toggle: "modal", bs_target: "#editPostModal", remote: :true } %></td>
         <td><%= link_to "delete_post", user_post_path(@user.id, id: post.id), method: :delete,  remote: :true %></td>
       </tr>
-
     <%end%>
   </tbody>
 </table>
@@ -34,5 +32,4 @@ th ,tr,td{
   width: 500px;
   
 }
-</style>
-
+</style> 

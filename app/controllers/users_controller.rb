@@ -9,7 +9,7 @@ class UsersController < ApplicationController
     def show
         @user = User.find(params[:id])
             respond_to do |format|
-                format.js { flash[:info] = "The article with an ID of #{@user.id} has had their admin attribute toggled!" }
+                format.js { flash[:info] = "The user with an name of #{@user.name} has show!" }
         end
     end
     
@@ -22,7 +22,7 @@ class UsersController < ApplicationController
         #respond_to do |format|
         if @user.save
             respond_to do |format|
-               format.js { flash[:info] = "The article with an ID of #{@user.id} has had their admin attribute toggled!" }
+               format.js { flash[:info] = "The user with an name of #{@user.name} has created!" }
             end
         else
             render :edit, status: :unprocessable_entity

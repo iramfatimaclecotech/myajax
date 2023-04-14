@@ -75,3 +75,10 @@ gem "jquery-rails"
 gem "bootstrap"
 gem "sassc-rails"
 gem "select2-rails"
+gem 'stimulus-rails'
+gem 'sunspot_rails', '~> 2.6'
+gem 'progress_bar'
+
+group :test, :development do
+  gem 'sunspot_solr'
+end

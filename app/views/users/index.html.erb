@@ -1,27 +1,26 @@
 
-<div class="container  pb -50"  >
+<div class="container  pb -50 "  >
   <div id="user-edit">
   <div id="userTable"></div>
   <h4 class="size  mt-3"> Users </h4>
-    <table class="table  table  mb -3" >
-          <thead  >
+  <div class="padding pb 5" >
+    <table class="table  table  mb -3  ">
+          <thead>
               <tr>
-                  <th scope="col"  class="table-dark "  width= "1000px" class="align-middle">User Name</th>
+                  <th scope="col"  class="table-dark "  width= "1000px" class="align-middle">User Name:</th>
               </tr>
           </thead>
-          <tbody  class="table-primary"  >
-            <% @users.each do |user| %>
-              <%= render "user_row", user: user %><br>
-            <% end %><tr>
-            <td  style="width:1000%">
-            <%= link_to 'New User', new_user_path, class: "btn btn-primary btn-lg " , data: { bs_toggle: "modal", bs_target: "#user-new", remote: :true } %></td>
-            </tr>
-
-          </tbody>
-      
+            <tbody  class="table-primary"  >
+                  <% @users.each do |user| %>
+                    <%= render "user_row", user: user %><br>
+                  <% end %><tr>
+                  <td  style="width:1000%">
+                  <%= link_to 'New User', new_user_path, class: "btn btn-primary btn-lg " , data: { bs_toggle: "modal", bs_target: "#user-new", remote: :true } %></td>
+                  </tr>
+            </tbody>
       </table>
   </div>
-  
+  </div>
 </div>  
   <%#= link_to "New user", new_user_path,  remote: :true,  class: 'btn btn-info btn-sm' %>
 <div class="modal fade" id="user-new" tabindex="-1" aria-labelledby="NewUserModalLabel" aria-hidden="true">
@@ -38,9 +37,6 @@
     </div>
 </div> 
 
-
-
-
 <!-- Modal -->
 <div class="modal fade" id="editUserModal" tabindex="-1" aria-labelledby="editUserModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -50,13 +46,16 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
         <div id="editUserForm">
-        
       </div>
-    
   </div>
 </div>
-<div id="#user-destroy"></div>
 
+<div id="flash-message">
+    <%= render 'users/flash2' %>
+</div>
+<div id="user-destroy"></div>
+
+<div id="home-id" ></div>
 
 
 
@@ -77,6 +76,9 @@
   .table{
     width: 1000px;
   }
-  
+  .padding{
+    padding-bottom: 100px;
+    
+  }
   
 </style>

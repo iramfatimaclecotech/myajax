@@ -1,49 +1,37 @@
 <center>
 <div id="search">
 <h1>search index </h1>
-<div class="dropdown">
-<div class="form-group  ">
- <h4 >Select User:</h4>
-<ul>
-  <% @searches.each do |search| %>
-    <li>
-      <%=link_to search.name,search, remote: :true %>
-    </li>
-  <% end %>
-</ul>
+  <div class="dropdown">
+      <div class="form-group  ">
+          <h4 >Select User:</h4>
+            <div id="search">
 
-<%= link_to "New search", new_search_path,remote: :true, class:"btn btn-primary" %>
-</center>
-<div id="search">
- </div>
+            <table class="table   table-danger w">
+            <thead>
+                <tr>
+                  <th scope="col">select user</th>
+                </tr>
+            </thead>
+            <tbody>
+            <% @searches.each do |search| %>
+              <tr>
+                  <td> <%=link_to search.name,search, remote: :true %></td>
+              </tr>
+              <% end %>
+              <tr>
+                  <td><%= link_to "New search", new_search_path,remote: :true, class:"btn btn-primary" %></td>
+              </tr>
+            </tbody>
+            </table>
+          </div>  
+      </div>
+
+<div id="flash-message">
+    <%= render 'searches/flash' %>
 </div>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td colspan="2">Larry the Bird</td>
-      <td>@twitter</td>
-    </tr>
-  </tbody>
-</table>
+<style>
+.w{
+  width: 250px
+}
+</style>

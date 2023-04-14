@@ -6,7 +6,7 @@ class SearchesController < ApplicationController
   def show
     @search = Search.find(params[:id])
     respond_to do |format|
-      format.js { flash[:info] = "The article with an ID of #{@search.id} has had their admin attribute toggled!" }
+      format.js { flash[:info] = "The search with an name of #{@search.name} has showen!" }
   end
     
   end
@@ -19,7 +19,8 @@ class SearchesController < ApplicationController
     @search = Search.new(search_params)
     if @search.save
       respond_to do |format|
-        format.js { flash[:info] = "The article with an ID of #{@search.id} has had their admin attribute toggled!" }
+        format.js { flash.now[:success] = "The search name with an ID of #{@search.name} has created"
+                                    flash.now[:success] = 'successul created.' }
     end
       
     else

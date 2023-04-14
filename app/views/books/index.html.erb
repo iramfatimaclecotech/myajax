@@ -1,0 +1,14 @@
+<h1>Books#index</h1>
+<p>Find me in app/views/books/index.html.erb</p>
+<div id= "new-book">
+<%= form_tag search_books_path, :method => :get do %>
+  <%= text_field_tag :query, params[:query] %> <%= submit_tag "Search!" %>
+<% end %>
+<div>
+ <%= link_to "New book", new_book_path, remote: :true, class: 'btn btn-info btn-sm' %>
+
+ <%= form_with url: books_index_path do |f| %>
+   <%= f.label :title %>
+   <%= f.text_field :title %>
+   <%= f.submit %>
+<% end %>
