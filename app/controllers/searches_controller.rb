@@ -6,9 +6,9 @@ class SearchesController < ApplicationController
   def show
     @search = Search.find(params[:id])
     respond_to do |format|
-      format.js { flash[:info] = "The search with an name of #{@search.name} has showen!" }
-  end
-    
+      format.html { render(:text => "not implemented") }
+      format.js
+    end
   end
 
   def new

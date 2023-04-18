@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+    
     def index
         @users = User.all
         # respond_to do |format|
@@ -8,9 +9,9 @@ class UsersController < ApplicationController
       
     def show
         @user = User.find(params[:id])
-            respond_to do |format|
-                format.js { flash[:info] = "The user with an name of #{@user.name} has show!" }
-        end
+        respond_to do |format|
+            format.js { render(:text => "not implemented") } 
+        end  
     end
     
     def new
@@ -25,7 +26,7 @@ class UsersController < ApplicationController
                format.js { flash[:info] = "The user with an name of #{@user.name} has created!" }
             end
         else
-            render :edit, status: :unprocessable_entity
+            render :new, status: :unprocessable_entity
       end
     end
     
@@ -49,7 +50,7 @@ class UsersController < ApplicationController
         @user = User.find(params[:id])
         @user.destroy
         respond_to do |format|
-            format.html { redirect_to article_url }
+            format.html { redirect_to user_url }
             # format.json { head :no_content }
             format.js   { render :layout => false }
         end

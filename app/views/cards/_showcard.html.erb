@@ -1,0 +1,70 @@
+<div class="container   body" height= "1000px">
+<center>
+<h1 style="color: #558757;">card Details </h1>
+<table class="table table-success  w" colspan="2">
+  <thead>
+    <tr>
+      <th class="text-center" colspan="2">show card details</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">name</th>
+      <td><%= @card.name %></td>
+    </tr>
+    <tr>
+      <th scope="row">header</th>
+      <td><%= @card.header %></td>
+    </tr>
+    <tr>
+      <th scope="row">rating</th>
+      <%@card.reviews.each do |review| %>
+      <td><%= review.rating %></td>
+      <% end %>
+    </tr>
+    <tr>
+    <td><% review.rating.to_i.times do %>
+                    
+                      <span class="glyphicon glyphicon-star" aria-hidden="true"></span>           
+                  <% end %></td>
+    </tr>
+    <tr>
+    <td><%#=link_to 'Edit review', edit_card_review_path(@review), remote: :true %></td>
+    <td><%#= link_to 'Destroy', review, confirm: 'Are you sure?', method: :delete ,class:"btn btn secondry"%></td>
+    </tr>
+
+  </tbody>
+</table>
+</center>
+
+
+<%= form_with model: [ @card, @card.reviews.build ], remote: true  do |f| %>
+<%= hidden_field_tag :previous_request, request.referer %>
+  <div class="field form-group">
+  <%= f.label :rating, "What's your overall rating?" %>
+    <div class="rating">
+      <%= f.collection_radio_buttons(:rating, [[5],[4],[3],[2],[1]], :first, :last) do |star| %>
+          <%= star.radio_button %>
+          <%= star.label(class: "text-white") %>
+      <% end %>
+    </div>
+  </div>
+  <div class="actions">
+    <%= f.submit "Submit your review", class: "btn btn-info .b" %>
+  </div>
+<% end %>
+
+<style>
+.w{
+  width: 100%;
+  padding-top: 5px;
+}
+.b{
+  --bs-btn-border-radius: 0.0;
+  width: 20%;
+}
+.body{
+  --bs-body-bg: #b0cfcc;
+}
+</style>
+</div>

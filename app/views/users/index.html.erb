@@ -1,37 +1,40 @@
 
 <div class="container  pb -50 "  >
-  <div id="user-edit">
-  <div id="userTable"></div>
-  <h4 class="size  mt-3"> Users </h4>
-  <div class="padding pb 5" >
-    <table class="table  table  mb -3  ">
-          <thead>
-              <tr>
-                  <th scope="col"  class="table-dark "  width= "1000px" class="align-middle">User Name:</th>
-              </tr>
-          </thead>
-            <tbody  class="table-primary"  >
-                  <% @users.each do |user| %>
-                    <%= render "user_row", user: user %><br>
-                  <% end %><tr>
-                  <td  style="width:1000%">
-                  <%= link_to 'New User', new_user_path, class: "btn btn-primary btn-lg " , data: { bs_toggle: "modal", bs_target: "#user-new", remote: :true } %></td>
-                  </tr>
-            </tbody>
-      </table>
-  </div>
-  </div>
-</div>  
+    <div id="user-edit">
+      <div id="userTable"></div>
+          <h4 class="size  mt-3"> Users </h4>
+            <div class="padding pb 5" ></div>
+                <table class="table  table  mb -3  ">
+                    <thead>
+                        <tr>
+                            <th scope="col"  class="table-dark "  width= "1000px" class="align-middle">User Name:</th>
+                        </tr>
+                    </thead>
+                        <tbody class="table-primary" >
+                              <% @users.each do |user| %><tr>
+        
+                              <td><%=link_to user.name ,user , class:"a" %></td>
+                                    <td><%=link_to "Edit", edit_user_path(user), remote: :true,  class: 'btn btn-success bs-btn-bg: #6F8557' , data: { bs_toggle: "modal", bs_target: "#editUserModal" } %></td></tr>
+                              <% end %><tr>
+                                    <td style="width:1000%">
+                                        <%= link_to 'New User', new_user_path, class: "btn btn-primary  " , data: { bs_toggle: "modal", bs_target: "#user-new", remote: :true } %></td>
+                                      </tr>
+                        </tbody>
+                </table>
+      </div>
+  </div>  
+
+
+
   <%#= link_to "New user", new_user_path,  remote: :true,  class: 'btn btn-info btn-sm' %>
 <div class="modal fade" id="user-new" tabindex="-1" aria-labelledby="NewUserModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="NewUserModalLabel">Create New User</h5>
+                <h5 class="modal-title" id="NewUserModalLabel">Create  User</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div id= "user-form">
-
             </div>
         </div>
     </div>
@@ -55,7 +58,6 @@
 </div>
 <div id="user-destroy"></div>
 
-<div id="home-id" ></div>
 
 
 

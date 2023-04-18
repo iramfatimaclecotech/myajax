@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'reviews/index'
+  get 'cards/index'
  # get 'homes/index'
   get 'books/index'
   get 'creators/index'
@@ -9,6 +11,7 @@ Rails.application.routes.draw do
   get 'searches/index'
   get 'homes/post'
   get 'homes/post_data'
+ 
 
 
   
@@ -39,6 +42,10 @@ Rails.application.routes.draw do
   end
   resources :users do
     resources :posts
+  end
+
+  resources :cards do
+    resources :reviews
   end
   
 end

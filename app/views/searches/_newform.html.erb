@@ -7,13 +7,7 @@
   <div class="col-sm-9">
       <p>
         <%= form.label :name %><br>
-        <%= form.select :name, Search.all.pluck(:name,:title),{:class => 'form-control search-select    btn btn-danger dropdown-toggle dropdown-toggle-split', multiple: true, style: 'width: 100%'}%>
-        
-        <%#= form.select(:search_ids, Search.all.collect {|a| [a.name]}, {}, class: "search-select", :multiple => true) %>
-        <%#= form.select(:search_name, Search.all.collect {|a| [a.name, a.type]}, {}, class: "search-select", :multiple => true) %> (for slide bar multiple option)
-        <%#= f.collection_select :search_id, @searches, :id, :name, include_blank: true %>
-        <%#= form.select_tag :search_ids, options_for_select(Search.all.map { |d| ["#{d.name}/#{d.title}", d.id]}), class: "select2_dashboard form-control"%>
-
+        <%= form.select :name, Search.all.pluck(:name),{:class => 'form-control search-select    btn btn-danger dropdown-toggle dropdown-toggle-split', multiple: true, style: 'width: 100%'}%>
       </p>
   </div>
       <p>
@@ -22,9 +16,6 @@
     <% end %>
     </div> 
   </div>
-  
-
-
   <center>
   <script>
   $(".search-select").select2({

@@ -2,20 +2,19 @@
 <div id="search">
 <h1>search index </h1>
   <div class="dropdown">
-      <div class="form-group  ">
+      <div class="form-group ">
           <h4 >Select User:</h4>
             <div id="search">
-
-            <table class="table   table-danger w">
+            <table class="table   table-danger w ">
             <thead>
                 <tr>
-                  <th scope="col">select user</th>
+                  <th scope="col ">select user</th>
                 </tr>
             </thead>
             <tbody>
-            <% @searches.each do |search| %>
+                <% @searches.each do |search| %>
               <tr>
-                  <td> <%=link_to search.name,search, remote: :true %></td>
+                  <td><%= link_to  search.name, search, remote: :true %></td>
               </tr>
               <% end %>
               <tr>
@@ -33,5 +32,8 @@
 <style>
 .w{
   width: 250px
+}
+.padding{
+   padding-top: ($spacer * .5) !important;
 }
 </style>
