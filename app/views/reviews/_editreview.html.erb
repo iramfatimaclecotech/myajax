@@ -1,0 +1,16 @@
+
+<%= form_with model:[ @card, @review ] do |f| %>
+  <div class="field form-group">
+    <%= f.label :rating, "edit your overall rating?" %>
+    <div class="rating">
+      <%= f.collection_radio_buttons(:rating, [[5],[4],[3],[2],[1]], :first, :last) do |star| %>
+          <%= star.radio_button %>
+           <%#= .radio_button + b.label {''} %>
+          <%= star.label(class: "text-white") %>
+      <% end %>
+    </div>
+  </div>
+  <div class="actions">
+    <%= f.submit "Submit your review", class: "btn btn-info .b" %>
+  </div>
+<% end %>

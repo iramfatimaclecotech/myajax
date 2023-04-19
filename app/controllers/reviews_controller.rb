@@ -26,13 +26,13 @@ class ReviewsController < ApplicationController
         respond_to do |format|
           format.js { flash[:info] = "The user with an name of #{@review.card_id} has created!" }
         end 
+        redirect_to card_path(@card)
     else
       flash[:notice] = "Error creating review: #{@review.errors}"
     end
   end
 
   def edit
-    debugger
      @card = Card.find(params[:card_id])
       @review = Review.find(params[:id])
    end
@@ -41,11 +41,11 @@ class ReviewsController < ApplicationController
    @card = Card.find(params[:card_id])
     @review = Review.find(params[:id])
 
-    if @review.update_attributes(review_params)
-      flash[:notice] = "Review updated"
+    if @review.update(review_params)
       respond_to do |format|
-        format.js { flash[:info] = "The user with an name of has created!" }
+        format.js { flash[:info] = "The review with an name of has created!" }
      end
+     redirect_to card_path(@card)
     else
       flash[:error] = "There was an error updating your review"
       
@@ -59,11 +59,12 @@ class ReviewsController < ApplicationController
     respond_to do |format|
       format.js { flash[:info] = "The user with an name of #{@user.name} has created!" }
     end
+    redirect_to card_path(@card)
   end
 
   private
     def review_params
-      params.require(:review).permit(:username, :body, :rating,:card_id)
+      params.require(:review).permit(:id,:username,:body, :rating,:card_id)
     end
 end
 

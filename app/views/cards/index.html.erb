@@ -1,7 +1,8 @@
+<div style="background-color:#aecbcf;  height: 1000px;  font-family: Fantasy;" class="pb -5">
 <center>
 <div id="card-show">
 <h1 style="color: #1b68b5 " font-family="Ebrima">Cards Index</h1>
-<div class="container root " >
+<div class="container root px-2" >
     <div class="--bs-body-bg: #607d8b;">
             <h4><%= link_to " new card", new_card_path , data: { bs_toggle: "modal", bs_target: "#new-card", remote: :true }, class:"link2"  %></h4> 
             <div class="body">
@@ -18,14 +19,13 @@
                                             <%=link_to "show card details" , card_path(card.id),remote: :true %>
                                         </div>
                                     </div>
-                                <% end %>
+                            <% end %>
                          <%end%>
                     </div>
                 </div>
             </div>
         </div>  
 </div>
-
 
 <div class="modal fade" id="new-card" tabindex="-1" aria-labelledby="NewCardModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -44,6 +44,7 @@
 
 
 </center>
+</div>
 
 <style>
 .name{
@@ -76,7 +77,13 @@
 .link2{
     --bs-link-color: #9c27b0;
 }
-.body{
-     --bs-body-bg: #758f8c;
+
+.body {
+    font-family: 'Montserrat', sans-serif !important;
 }
+.px-2 {
+  padding-top: ($spacer * .5) !important;
+ 
+}
+
 </style>
