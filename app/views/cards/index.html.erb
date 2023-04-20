@@ -7,7 +7,7 @@
             <h4><%= link_to " new card", new_card_path , data: { bs_toggle: "modal", bs_target: "#new-card", remote: :true }, class:"link2"  %></h4> 
             <div class="body">
                 <div class="row  name">
-                    <% @cards .each do |card|%>
+                    <% @cards.each do |card|%>
                         <h2 class="color"> name of cards:<%= card.name %> </h2><br>
                              <% card.images.each do |image| %>
                                 <div class="card name font  "style="width: 18rem;" >

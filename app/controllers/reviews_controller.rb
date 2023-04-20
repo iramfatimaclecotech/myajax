@@ -1,6 +1,4 @@
 class ReviewsController < ApplicationController
-
-
   def index
     @reviews= Review.all
   end
@@ -10,7 +8,7 @@ class ReviewsController < ApplicationController
     @review = Review.find(params[:id])
     respond_to do |format|
       format.js { flash[:info] = "The user with an name of #{@review.username} has created!" }
-   end
+    end
   end
 
   # def new 
@@ -23,10 +21,10 @@ class ReviewsController < ApplicationController
     @review = @card.reviews.create(review_params)
     if @review.save
       flash[:notice] = 'Review was successfully created.'
-        respond_to do |format|
-          format.js { flash[:info] = "The user with an name of #{@review.card_id} has created!" }
-        end 
-        redirect_to card_path(@card)
+        # respond_to do |format|
+        #   format.js { }
+        # end 
+       # redirect_to card_path(@card)
     else
       flash[:notice] = "Error creating review: #{@review.errors}"
     end
@@ -40,15 +38,12 @@ class ReviewsController < ApplicationController
   def update
    @card = Card.find(params[:card_id])
     @review = Review.find(params[:id])
-
     if @review.update(review_params)
-      respond_to do |format|
-        format.js { flash[:info] = "The review with an name of has created!" }
-     end
-     redirect_to card_path(@card)
+    #   respond_to do |format|
+    #     format.js { }
+    #  end
     else
       flash[:error] = "There was an error updating your review"
-      
     end
   end
 
@@ -56,10 +51,11 @@ class ReviewsController < ApplicationController
     @card = Card.find(params[:card_id])
     @review = Review.find(params[:id])
     @review.destroy
-    respond_to do |format|
-      format.js { flash[:info] = "The user with an name of #{@user.name} has created!" }
-    end
-    redirect_to card_path(@card)
+    # respond_to do |format|
+    #   format.html{redirect_to root_path, status: :see_other} 
+    #   format.js { }
+    #   end
+    # redirect_to card_path(@card)
   end
 
   private
