@@ -1,0 +1,7 @@
+
+<% if @user.errors.any? %>
+   $("#errorArea").html("<%= j render("error", card: @card ) %>")
+<% else %>
+   $("#cardTable").html("<%= j render("card_details", card: @card) %>");
+   $(".close-modal").click();
+<% end %>

@@ -1,0 +1,15 @@
+<%= form_with model: card do |form| %>
+  <div>
+    <%= form.label :name %><br>
+    <%= form.text_field :name %>
+  </div>
+
+  <div>
+    <%= form.label :header %><br>
+    <%= form.text_area :header %><br>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

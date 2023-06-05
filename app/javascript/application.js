@@ -2,6 +2,11 @@
 import "@hotwired/turbo-rails"
 import "controllers"
 import "jquery"
-import "jquery_ujs"
+// import "jquery_ujs"
 import "popper"
 import "bootstrap"
+import Rails from '@rails/ujs';
+
+Rails.start();
+
+

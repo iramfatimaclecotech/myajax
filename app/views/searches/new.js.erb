@@ -1,0 +1,4 @@
+alert("flash")
+
+$("#search").html("<%= j render partial: 'newform', locals: { search: @search} %>")
+$('#flash-message').html("<%= j render 'flash' %>").fadeOut(3000);

@@ -1,0 +1,44 @@
+
+<div style="background-color:#d3d996;  height: 1000px;">
+      <div class="container   body" height= "1000px">
+        <h1 style="color: #558757;">card Details </h1>
+            <div class="container " style="color: black">
+                <div class="row ">
+                  <div class="col">
+                    <h2> Name:</h2><%= @card.name %>
+                  </div>
+                    <div class="col">
+                      <h2> Header:</h2><%= @card.header %>
+                    </div>
+                    <div class="col">
+                        <h2>Ratings : </h2>
+                        <div id='rating-stars'>
+                          <%= render partial: 'reviews/showreview', review: @review %>
+                        </div>
+                      </div>
+                    </div>
+      </div>  
+  </div>
+    <div><%= render "reviews/form" , review: @review %></div>
+<style>
+.w{
+  width: 100%;
+  padding-top: 5px;
+}
+.b{
+  --bs-btn-border-radius: 0.0;
+  width: 20%;
+}
+.body{
+  --bs-body-bg: #b0cfcc;
+}
+.table{
+  border-bottom-width: 5px;
+  --bs-body-bg: #b0ddb2;
+}
+.button{
+  --bs-btn-border-width:0.0 px;
+}
+
+</style>
+</div>

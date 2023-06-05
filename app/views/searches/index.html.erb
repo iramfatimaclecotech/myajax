@@ -1,0 +1,39 @@
+<center>
+<div id="search">
+<h1>search index </h1>
+  <div class="dropdown">
+      <div class="form-group ">
+          <h4 >Select User:</h4>
+            <div id="search">
+            <table class="table   table-danger w ">
+            <thead>
+                <tr>
+                  <th scope="col ">select user</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% @searches.each do |search| %>
+              <tr>
+                  <td><%= link_to  search.name, search, remote: :true %></td>
+              </tr>
+              <% end %>
+              <tr>
+                  <td><%= link_to "New search", new_search_path,remote: :true, class:"btn btn-primary" %></td>
+              </tr>
+            </tbody>
+            </table>
+          </div>  
+      </div>
+
+<div id="flash-message">
+    <%= render 'searches/flash' %>
+</div>
+
+<style>
+.w{
+  width: 250px
+}
+.padding{
+   padding-top: ($spacer * .5) !important;
+}
+</style>

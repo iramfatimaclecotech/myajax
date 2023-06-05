@@ -1,0 +1,24 @@
+<center>
+<h1>search index </h1>
+<div class="dropdown">
+<div class="form-group ">
+ <h4 >Select User:</h4>
+<%= form_with model: @search , remote: :true do |form| %>
+  <div class="col-sm-9">
+      <p>
+        <%= form.label :name %><br>
+        <%= form.select :name, Search.all.pluck(:name),{:class => 'form-control search-select    btn btn-danger dropdown-toggle dropdown-toggle-split', multiple: true, style: 'width: 100%'}%>
+      </p>
+  </div>
+      <p>
+        <%= form.submit %>
+      </p>
+    <% end %>
+    </div> 
+  </div>
+  <center>
+  <script>
+  $(".search-select").select2({
+   multiple: true
+  });
+</script>

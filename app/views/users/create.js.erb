@@ -1,6 +1,7 @@
+alert("create")
 <% if @user.errors.any? %>
    $("#errorArea").html("<%= j render("error", user: @user ) %>")
 <% else %>
-   $("#userTable").prepend("<%= j render("user_row", user: @user) %>");
+   $("#userTable").html("<%= j render("showcreate", user: @user) %>");
    $(".close-modal").click();
 <% end %>

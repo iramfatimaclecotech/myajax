@@ -1,0 +1,14 @@
+<!--
+
+<%= form.label :user_id %>
+<%= form.collection_select(:user_id, User.all, :id, :name, { include_blank: true }, class: "content-search") %>
+
+<!-->
+<div class="form-group  row">
+                <label class="col-sm-3 col-form-label text-center">Select User:</label>
+                  <div class="col-sm-9">
+                    <%#= f.collection_select :user_ids, question.question_group.survey_section.organisation.teams, :id, :name, {}, {:class => 'form-control teams-select', multiple: true, style: 'width: 100%'} %>
+                  </div>
+              </div>
+
+<%= f.select :user_name, User.pluck(:name) %> 

@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+    
     def index
         @users = User.all
         # respond_to do |format|
@@ -8,9 +9,9 @@ class UsersController < ApplicationController
       
     def show
         @user = User.find(params[:id])
-            respond_to do |format|
-                format.js { flash[:info] = "The article with an ID of #{@user.id} has had their admin attribute toggled!" }
-        end
+        respond_to do |format|
+            format.js { } 
+        end  
     end
     
     def new
@@ -21,11 +22,11 @@ class UsersController < ApplicationController
         @user = User.new(user_params)
         #respond_to do |format|
         if @user.save
-            respond_to do |format|
-               format.js { flash[:info] = "The article with an ID of #{@user.id} has had their admin attribute toggled!" }
-            end
+            # respond_to do |format|
+            #    format.js { flash[:info] = "The user with an name of #{@user.name} has created!" }
+            # end
         else
-            render :edit, status: :unprocessable_entity
+            render :new, status: :unprocessable_entity
       end
     end
     
@@ -37,9 +38,9 @@ class UsersController < ApplicationController
       @user = User.find(params[:id])
         if @user.update(user_params)
             # redirect_to @article
-            respond_to do |format|
-               format.js { flash[:info] = "The user with an ID of #{@user.id} has had their admin attribute toggled!" }
-            end
+            # respond_to do |format|
+            #    format.js { flash[:info] = "The user with an ID of #{@user.id} has had their admin attribute toggled!" }
+            # end
         else
             render :edit, status: :unprocessable_entity
         end
@@ -48,11 +49,11 @@ class UsersController < ApplicationController
     def destroy
         @user = User.find(params[:id])
         @user.destroy
-        respond_to do |format|
-            format.html { redirect_to article_url }
-            # format.json { head :no_content }
-            format.js   { render :layout => false }
-        end
+        # respond_to do |format|
+        #     format.html { redirect_to user_url }
+        #     # format.json { head :no_content }
+        #     format.js   { render :layout => false }
+        # end
     end
         
     

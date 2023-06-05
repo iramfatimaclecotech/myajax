@@ -1,0 +1,17 @@
+<%# app/views/posts/_form.html.erb %>
+<%= form_with(model: post2, data: { form_validation_target: "form" }) do |form| %>
+  
+            <div class="field">
+                <%= form.label :title %>
+                <%= form.text_field :title, data: { action: "form-validation#handleChange" } %>
+            </div>
+
+            <div class="field">
+                <%= form.label :body %>
+                <%= form.text_area :body, data: { action: "form-validation#handleChange" } %>
+            </div>
+
+            <div class="actions">
+                <%= form.submit %>
+            </div>
+<% end %>
