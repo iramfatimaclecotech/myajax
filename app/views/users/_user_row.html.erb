@@ -1,7 +1,7 @@
 
 <div id="user-edit">
     <tr id="userRow_<%= user.id %>" >
-        <td> name:<%#= link_to user.name, user, class:"a", remote: :true %></td>
+        <td> name:<%= link_to user.name, user, class:"a", remote: :true %></td>
         <td><%#= link_to "Edit", edit_user_path(user), remote: :true,  class: 'btn btn-success bs-btn-bg: #6F8557' , data: { bs_toggle: "modal", bs_target: "#editUserModal" } %></td>
     </tr>
 </div>

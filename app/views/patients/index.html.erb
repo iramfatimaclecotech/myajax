@@ -1,0 +1,36 @@
+<center>
+
+<% @patients.each do |patient| %>
+  <div class="patient">
+    <h3>patient name:<%= patient.name %></h3>
+    <h4>Appointments list :</h4><br>
+    <ul>
+      
+  <div id="stage_dropdown"></div>
+    </ul>
+  </div>
+      <h1>add a appointment :</h1>
+
+  <%= form_with model:[patient, Appointment.new ], local: false do |form| %>
+    <p>
+      <%= form.label :start_date %><br>
+      <%= form.datetime_select :start_date %>
+    </p>
+    <p>
+      <%= form.label :end_date %><br>
+      <%= form.datetime_select :end_date %>
+    </p>
+    <p>
+    <p>
+      <%= form.label :physician_id %><br>
+      <%#= form.collection_select :physician_id, Physician.all, :id, :name, class: "form-control" %>
+      <%= form.text_field :physician_id %><br>
+    </p>
+    <p>
+      <%= form.submit %>
+    </p>
+  <% end %>
+
+ 
+<% end %>
+</center>

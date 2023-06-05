@@ -1,0 +1,11 @@
+<h2>Add a comment:</h2>
+<%= form_with model: [@patient, @patient.physicians.build] do |form| %>
+  <p>
+    <%= form.label :name %><br>
+    <%= form.text_field :name %>
+  </p>
+  
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>

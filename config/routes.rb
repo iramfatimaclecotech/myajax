@@ -1,4 +1,15 @@
 Rails.application.routes.draw do
+  get 'appointments/index'
+  get 'patients/index'
+  get 'physicians/index'
+  resources :sharks
+  get 'endangered/index'
+  get 'endangered/data', to: 'endangered#data'
+  post 'endangered/upload', to: 'endangered#upload'
+  post 'endangered/destroy', to: 'endangered#destroy'
+
+
+
   get 'reviews/index'
   get 'cards/index'
  # get 'homes/index'
@@ -20,7 +31,7 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "articles#index
   #get "/searches", to: "searches#index"
-  root "posts#index"
+  #root "posts#index"
   resources :searches
     resources :posts2
     namespace :form_validations do
@@ -47,5 +58,16 @@ Rails.application.routes.draw do
   resources :cards do
     resources :reviews
   end
+
+  resources :patients 
+
+  root "patients#index"
+  #get "/physicians", to: "physicians#index"
+  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  resources :patients do
+    resources :physicians 
+      resources :appointments
+  end
+  
   
 end

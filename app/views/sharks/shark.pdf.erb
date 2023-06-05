@@ -1,0 +1,23 @@
+Date of extract: 
+<%= Date.today %>
+<br>
+Shakrks count:
+<%= @sharks.count %>
+<br>
+
+<table style="width:100%">
+  <thead>
+    <tr>
+      <th>name</th>
+      <th>fact</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @sharks.each do |shark| %>
+      <%= content_tag :tr, id: dom_id(shark), class: dom_class(shark) do %>
+      <td><%= shark.name%></td>
+        <td><%=shark.fact %></td>
+      <% end %>
+    <% end %>
+  </tbody>
+</table> 

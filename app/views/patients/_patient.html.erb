@@ -1,0 +1,17 @@
+<%= form_with model: @patient,local: :true do |form| %>
+  
+  <div>
+    <%= form.label :patient_name %><br>
+    <%= form.text_field :name %><br>
+   
+  </div>
+  <div class="form-group mb-3">
+      <%= form.label :physician %>
+      <%#= form.collection_select :physician_id, Physician.all, :id, :name, class: "form-control" %>
+      <%= form.text_field :physician %><br>
+    </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

@@ -82,3 +82,8 @@ gem 'progress_bar'
 group :test, :development do
   gem 'sunspot_solr'
 end
+
+gem 'whenever', require: false
+gem 'sidekiq', '~>6.0.0'
+gem 'wicked_pdf'
+gem "wkhtmltopdf-binary", group: :development

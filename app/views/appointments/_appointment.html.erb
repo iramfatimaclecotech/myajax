@@ -1,0 +1,8 @@
+
+ <% @patient.appointments.each do |appointment| %>
+        <li>
+          <p>start_date</p>  <%= appointment.start_date %>
+          <p>end_date</p>  <%= appointment.end_date %>
+          <br> Dr.name: <%= appointment.physician.name %>
+        </li>
+  <% end %>

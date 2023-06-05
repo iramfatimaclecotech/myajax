@@ -12,7 +12,7 @@ class ReviewsController < ApplicationController
   end
 
   # def new 
-  #   debugger
+  #   
   #   @review = Review.new
   # end
 

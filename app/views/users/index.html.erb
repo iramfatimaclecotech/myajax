@@ -13,7 +13,7 @@
                         <tbody class="table-primary" >
                               <% @users.each do |user| %><tr>
         
-                              <td><%=link_to user.name ,user , class:"a", remote: true %></td>
+                              <td id='user_id<%user.id%>'><%=link_to user.name ,user , class:"a", remote: true %></td>
                                     <td><%=link_to "Edit", edit_user_path(user), remote: :true,  class: 'btn btn-success bs-btn-bg: #6F8557' , data: { bs_toggle: "modal", bs_target: "#editUserModal" } %></td></tr>
                               <% end %><tr>
                                     <td style="width:1000%">
@@ -21,7 +21,7 @@
                                     </tr>
                         </tbody>
                 </table>
-      </div>
+        </div>
   </div>  
 
   <%#= link_to "New user", new_user_path,  remote: :true,  class: 'btn btn-info btn-sm' %>
