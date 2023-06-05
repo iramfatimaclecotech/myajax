@@ -26,7 +26,7 @@ def create
  
   @patient = Patient.find(params[:patient_id])
   @appointment = @patient.appointments.build(appointment_params)
-  debugger
+  
   if @appointment.save
     respond_to do |format|
       format.js { flash[:info] = "The user with an name of  has created!" }
@@ -42,9 +42,18 @@ def edit
 end
 
 def update
+  
   @patient = Patient.find(params[:patient_id])
+  @physician = Physician.find(params[:physician_id])
   @appointment = Appointment.find(params[:id])
+  
   #@appointment.update(appointment_params)
+  if params["attr"] == "patient_name"
+    
+    @patient.update(name: params["appointment"]["patient"])
+  else
+    @physician&.update(name: params["appointment"]["physician"])
+  end
   if @appointment.update(appointment_params)
     render json: { success: true }
   else
@@ -68,4 +77,3 @@ private
     params.require(:appointment).permit(:start_date, :patient_id, :physician_id, :end_date, physician_attributes:[:id, :name], patient_attributes:[:id, :name])
   end
 end
-

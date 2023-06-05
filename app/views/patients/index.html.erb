@@ -16,16 +16,16 @@
   <% @patients.each do |patient| %>
     <% patient.appointments.each do |appointment| %>
       <tr>
-        <td class="editable-cell" data-attribute="<%= appointment.start_date %>" data-id1="<%= appointment.id %>", data-id2="<%= patient.id%>" >START DATE: <%= appointment.start_date %></td>
+        <td class="editable-cell" data-attribute="start_date" data-id1="<%= appointment.id %>", data-id2="<%= patient.id%>", data-physician_id="<%= appointment.physician.id %>" >START DATE: <%= appointment.start_date %></td>
       </tr>
       <tr>
-        <td class="editable-cell" data-id="<%= appointment.id %>", data-id2="<%= patient.id%>" data-attribute="end_date">END DATE: <%= appointment.end_date %></td>
+        <td class="editable-cell" data-id="<%= appointment.id %>", data-id2="<%= patient.id%>", data-physician_id="<%= appointment.physician.id %>" data-attribute="end_date">END DATE: <%= appointment.end_date %></td>
       </tr>
       <tr>
-        <td class="editable-cell" data-id="<%= appointment.id %>", data-id2="<%= patient.id%>" data-attribute="physician_name">DR. NAME: <%= appointment.physician.name if appointment.physician.present? %></td>
+        <td class="editable-cell" data-id="<%= appointment.id %>", data-id2="<%= patient.id%>", data-physician_id="<%= appointment.physician.id %>" data-attribute="physician_name">DR. NAME: <%= appointment.physician.name if appointment.physician.present? %></td>
       </tr>
       <tr>
-        <td class="editable-cell" data-attribute="<%= appointment.patient.name %>" data-id="<%= appointment.id %>", data-id2="<%= patient.id%>" data-attribute="patient_name">PATIENT NAME: <%= appointment.patient.name if appointment.patient.present? %></td>
+        <td class="editable-cell" data-attribute="patient_name" data-id="<%= appointment.id %>", data-id2="<%= patient.id%>", data-physician_id="<%= appointment.physician.id %>" data-attribute="patient_name">PATIENT NAME: <%= appointment.patient.name if appointment.patient.present? %></td>
       </tr>
       <tr>
         <td>
@@ -51,38 +51,38 @@
       <h1>add a appointment :</h1>
 
   <%= form_with model:[patient, Appointment.new ], local: false do |form| %>
-    <div class="dropdown">
+      <div class="dropdown">
+          <p>
+            <%= form.label :start_date %><br>
+            <%= form.text_field  :start_date ,class: "form-control wid"%>
+          </p>
+      </div>
+      <div class="dropdown">
         <p>
-          <%= form.label :start_date %><br>
-          <%= form.text_field  :start_date ,class: "form-control wid"%>
+          <%= form.label :end_date %><br>
+          <%= form.text_field  :end_date,class: "form-control  wid" %>
         </p>
-    </div>
-    <div class="dropdown">
-      <p>
-        <%= form.label :end_date %><br>
-        <%= form.text_field  :end_date,class: "form-control  wid" %>
-      </p>
-    </div>
-      <p>
-        <%= form.fields_for :physician, Physician.new do |ph| %>
-          <div class="form-group mt-3">
-              <%= ph.label :physician_name %>
-              <%= ph.text_field :name,class: "form-control wid" %><br>
-          </div>
-        <% end %>
-      <p>
-      <p>
-        <%= form.fields_for :patient, Patient.new do |ph| %>
-          <div class="form-group mt-3">
-              <%= ph.label :patient_name %>
-              <%= ph.text_field :name,class: "form-control wid" %><br>
-          </div>
-        <% end %>
-      <p>
-        <%= form.submit class:"btn btn-secondary dropdown-toggle" %>
-      </p>
-    <% end %>
-<% end %>
+      </div>
+        <p>
+          <%= form.fields_for :physician, Physician.new do |ph| %>
+            <div class="form-group mt-3">
+                <%= ph.label :physician_name %>
+                <%= ph.text_field :name,class: "form-control wid" %><br>
+            </div>
+          <% end %>
+        <p>
+        <p>
+          <%= form.fields_for :patient, Patient.new do |ph| %>
+            <div class="form-group mt-3">
+                <%= ph.label :patient_name %>
+                <%= ph.text_field :name,class: "form-control wid" %><br>
+            </div>
+          <% end %>
+        <p>
+          <%= form.submit class:"btn btn-secondary dropdown-toggle" %>
+        </p>
+      <% end %>
+  <% end %>
 
 
 
@@ -104,27 +104,33 @@
 
       var id1 = $('td').data('id1');
       var id2 = $('td').data('id2');
+      var physician_id = $('td').data('physician_id');
       var attribute = $cell.data('attribute');
 
       $input.on('keydown', function(event) {
         if (event.keyCode === 13) { // Enter key code
           event.preventDefault();
           var newContent = $input.val();
-          debugger
+          
           var updateData = {};
-          debugger
+          
           if (attribute === 'start_date' || attribute === 'end_date') {
             updateData[attribute] = newContent;
           } else if (attribute === 'physician_name') {
-            updateData.physician = { name: newContent };
+            updateData.physician = newContent;
           } else if (attribute === 'patient_name') {
-            updateData.patient = { name: newContent };
+            updateData.patient = newContent;
           }
-          debugger
+          
           $.ajax({
-            url: '/patients/' + id2 + '/appointments/' + id1  ,
+            url: '/patients/' + id2 + '/appointments/' + id1,
             method: 'PATCH',
-            data: { appointment: updateData },
+            data: { 
+              appointment: updateData,
+              // name: newContent,
+              physician_id: physician_id,
+              attr: attribute
+            },
             dataType: 'json',
             success: function(response) {
               $cell.html(newContent);
@@ -133,14 +139,14 @@
         }
       });
     });
-    $('.editable-cell').each(function() {
-      var $cell = $(this);
-      var id1 = $cell.data('id1');
-      var storedValue = localStorage.getItem('cell_' + id1);
-      if (storedValue) {
-        $cell.html(storedValue);
-      }
-    });
+    // $('.editable-cell').each(function() {
+    //   var $cell = $(this);
+    //   var id1 = $cell.data('id2');
+    //   var storedValue = localStorage.getItem('cell_' + id2);
+    //   if (storedValue) {
+    //     $cell.html(storedValue);
+    //   }
+    // });
   });
 };
 
