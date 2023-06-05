@@ -1,36 +1,159 @@
-<center>
 
-<% @patients.each do |patient| %>
-  <div class="patient">
-    <h3>patient name:<%= patient.name %></h3>
-    <h4>Appointments list :</h4><br>
-    <ul>
+<div style="  height: 1000px;  font-family: Fantasy;" class="pb -5">
+<center>
+  <h4> Patient list :</h4><br>
+
+    <table class="table w   table-primary">
+        <thead class="thead-dark">
+          <tr class="table-dark">
+            <th><%@patients.each do |patient| %>
+                <h3>patient name:<%= patient.name %> , Appointments list</h3></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <tbody>
+  <% @patients.each do |patient| %>
+    <% patient.appointments.each do |appointment| %>
+      <tr>
+        <td class="editable-cell" data-attribute="<%= appointment.start_date %>" data-id1="<%= appointment.id %>", data-id2="<%= patient.id%>" >START DATE: <%= appointment.start_date %></td>
+      </tr>
+      <tr>
+        <td class="editable-cell" data-id="<%= appointment.id %>", data-id2="<%= patient.id%>" data-attribute="end_date">END DATE: <%= appointment.end_date %></td>
+      </tr>
+      <tr>
+        <td class="editable-cell" data-id="<%= appointment.id %>", data-id2="<%= patient.id%>" data-attribute="physician_name">DR. NAME: <%= appointment.physician.name if appointment.physician.present? %></td>
+      </tr>
+      <tr>
+        <td class="editable-cell" data-attribute="<%= appointment.patient.name %>" data-id="<%= appointment.id %>", data-id2="<%= patient.id%>" data-attribute="patient_name">PATIENT NAME: <%= appointment.patient.name if appointment.patient.present? %></td>
+      </tr>
+      <tr>
+        <td>
+          <%#= link_to "Edit Patient", edit_patient_appointment_path(patient.id, appointment.id), remote: true, class: "btn btn-dark" %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div id="stage_dropdown"></div>
+        </td>
+      </tr>
+    <% end %>
+  <% end %>
+</tbody>
+
+            
+          </tr>
+          <tr>
+        </tbody>
+    </table>
       
-  <div id="stage_dropdown"></div>
-    </ul>
-  </div>
+    <div  id="patient-form"></div>
       <h1>add a appointment :</h1>
 
   <%= form_with model:[patient, Appointment.new ], local: false do |form| %>
-    <p>
-      <%= form.label :start_date %><br>
-      <%= form.datetime_select :start_date %>
-    </p>
-    <p>
-      <%= form.label :end_date %><br>
-      <%= form.datetime_select :end_date %>
-    </p>
-    <p>
-    <p>
-      <%= form.label :physician_id %><br>
-      <%#= form.collection_select :physician_id, Physician.all, :id, :name, class: "form-control" %>
-      <%= form.text_field :physician_id %><br>
-    </p>
-    <p>
-      <%= form.submit %>
-    </p>
-  <% end %>
-
- 
+    <div class="dropdown">
+        <p>
+          <%= form.label :start_date %><br>
+          <%= form.text_field  :start_date ,class: "form-control wid"%>
+        </p>
+    </div>
+    <div class="dropdown">
+      <p>
+        <%= form.label :end_date %><br>
+        <%= form.text_field  :end_date,class: "form-control  wid" %>
+      </p>
+    </div>
+      <p>
+        <%= form.fields_for :physician, Physician.new do |ph| %>
+          <div class="form-group mt-3">
+              <%= ph.label :physician_name %>
+              <%= ph.text_field :name,class: "form-control wid" %><br>
+          </div>
+        <% end %>
+      <p>
+      <p>
+        <%= form.fields_for :patient, Patient.new do |ph| %>
+          <div class="form-group mt-3">
+              <%= ph.label :patient_name %>
+              <%= ph.text_field :name,class: "form-control wid" %><br>
+          </div>
+        <% end %>
+      <p>
+        <%= form.submit class:"btn btn-secondary dropdown-toggle" %>
+      </p>
+    <% end %>
 <% end %>
+
+
+
+<div><%#= render "patients/patient" ,local: {patient: @patient} %></div>
+<%= link_to " new patient" ,new_patient_path, remote: :true ,class:"btn btn-dark"%>
 </center>
+</div>
+<script>
+
+ window.onload = function() {
+  $(document).ready(function() {
+    $(document).on('click', '.editable-cell', function() {
+      var $cell = $(this);
+      var originalContent = $cell.text();
+
+      $cell.html('<input type="text" value="' + originalContent + '">');
+      var $input = $cell.find('input');
+      $input.focus();
+
+      var id1 = $('td').data('id1');
+      var id2 = $('td').data('id2');
+      var attribute = $cell.data('attribute');
+
+      $input.on('keydown', function(event) {
+        if (event.keyCode === 13) { // Enter key code
+          event.preventDefault();
+          var newContent = $input.val();
+          debugger
+          var updateData = {};
+          debugger
+          if (attribute === 'start_date' || attribute === 'end_date') {
+            updateData[attribute] = newContent;
+          } else if (attribute === 'physician_name') {
+            updateData.physician = { name: newContent };
+          } else if (attribute === 'patient_name') {
+            updateData.patient = { name: newContent };
+          }
+          debugger
+          $.ajax({
+            url: '/patients/' + id2 + '/appointments/' + id1  ,
+            method: 'PATCH',
+            data: { appointment: updateData },
+            dataType: 'json',
+            success: function(response) {
+              $cell.html(newContent);
+            },
+          });
+        }
+      });
+    });
+    $('.editable-cell').each(function() {
+      var $cell = $(this);
+      var id1 = $cell.data('id1');
+      var storedValue = localStorage.getItem('cell_' + id1);
+      if (storedValue) {
+        $cell.html(storedValue);
+      }
+    });
+  });
+};
+
+
+</script>
+
+
+
+<style>
+.w{
+  width: 50%;
+}
+.wid{
+  width: 25%;
+}
+</style>

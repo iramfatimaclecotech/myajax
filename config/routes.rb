@@ -59,9 +59,10 @@ Rails.application.routes.draw do
     resources :reviews
   end
 
-  resources :patients 
+  #resources :patients 
 
   root "patients#index"
+  get "/patient", to: "patients#create"
   #get "/physicians", to: "physicians#index"
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   resources :patients do

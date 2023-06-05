@@ -17,14 +17,12 @@ class PatientsController < ApplicationController
   end
 
   def new
-    
     @patient = Patient.new
     # @pationt.physicians.build
     # @pationt.appointments.build
   end
 
   def create
-    
     @patient = Patient.create(patient_params)
     if @patient.save
       respond_to do |format|

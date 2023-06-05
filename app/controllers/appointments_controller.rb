@@ -18,19 +18,19 @@ end
 
 def new 
   @patient = Patient.find(params[:patient_id])
-  @pationt.physicians.build
+  @patient.physicians.build
   @patient.appointments.build
 end 
 
 def create
+ 
   @patient = Patient.find(params[:patient_id])
   @appointment = @patient.appointments.build(appointment_params)
+  debugger
   if @appointment.save
-    #@redirect_to @patients
-      respond_to do |format|
-        format.js { flash[:info] = "The user with an name of  has created!" }
+    respond_to do |format|
+      format.js { flash[:info] = "The user with an name of  has created!" }
      end
-
   else 
       render :new , status: :unprocessable_entity
   end 
@@ -38,19 +38,17 @@ end
 
 def edit
   @patient = Patient.find(params[:patient_id])
-  @appointment =  Appointment.find(params[:id])
+  @appointment = @patient.appointments.find(params[:id])
 end
 
 def update
-  @appointment =  Appointment.find(params[:id])
-
+  @patient = Patient.find(params[:patient_id])
+  @appointment = Appointment.find(params[:id])
+  #@appointment.update(appointment_params)
   if @appointment.update(appointment_params)
-   # redirect_to @article
-    respond_to do |format|
-      format.js { flash[:info] = "The article with an ID of #{@appointment.id} has had their admin attribute toggled!" }
-    end
+    render json: { success: true }
   else
-    render :edit, status: :unprocessable_entity
+    render json: { success: false, errors: @user.errors.full_messages }
   end
 end
 
@@ -67,7 +65,7 @@ end
 
 private
   def appointment_params
-    params.require(:appointment).permit(:start_date, :physician_id, :patient_id,:end_date)
+    params.require(:appointment).permit(:start_date, :patient_id, :physician_id, :end_date, physician_attributes:[:id, :name], patient_attributes:[:id, :name])
   end
 end
 

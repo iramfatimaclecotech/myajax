@@ -1,8 +1,25 @@
 
- <% @patient.appointments.each do |appointment| %>
-        <li>
-          <p>start_date</p>  <%= appointment.start_date %>
-          <p>end_date</p>  <%= appointment.end_date %>
-          <br> Dr.name: <%= appointment.physician.name %>
-        </li>
-  <% end %>
+ 
+
+<table class="table table-primary  w">
+  <thead>
+    <tr>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <% @patient.appointments.each do |appointment| %>
+     <tr> <td><%= appointment.start_date %></td></tr>
+    <tr>  <td> <%= appointment.end_date %></td></tr>
+     <tr> <td> <%= appointment.physician.name if appointment.physician.present? %></td></tr>
+     <tr> <td> <%= appointment.patient.name if appointment.patient.present? %></td></tr>
+       <% end %>
+    </tr>
+    <tr>
+  </tbody>
+</table>
+<style>
+.w{
+  width: 50%;
+}
+</style>
