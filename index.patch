@@ -1,0 +1,110 @@
+diff --git a/app/controllers/appointments_controller.rb b/app/controllers/appointments_controller.rb
+index f0341b1..4d45f72 100644
+--- a/app/controllers/appointments_controller.rb
++++ b/app/controllers/appointments_controller.rb
+@@ -42,14 +42,12 @@ def edit
+ end
+ 
+ def update
+-  
+   @patient = Patient.find(params[:patient_id])
+   @physician = Physician.find(params[:physician_id])
+   @appointment = Appointment.find(params[:id])
+-  
+   #@appointment.update(appointment_params)
++  
+   if params["attr"] == "patient_name"
+-    
+     @patient.update(name: params["appointment"]["patient"])
+   else
+     @physician&.update(name: params["appointment"]["physician"])
+diff --git a/app/views/patients/index.html.erb b/app/views/patients/index.html.erb
+index a0e6848..57fea66 100644
+--- a/app/views/patients/index.html.erb
++++ b/app/views/patients/index.html.erb
+@@ -1,33 +1,31 @@
+ 
+-<div style="  height: 1000px;  font-family: Fantasy;" class="pb -5">
++<div style="  height: 100px;  font-family: Fantasy;" class="pb -5">
+ <center>
+   <h4> Patient list :</h4><br>
+ 
+-    <table class="table w   table-primary">
+-        <thead class="thead-dark">
+-          <tr class="table-dark">
+-            <th><%@patients.each do |patient| %>
+-                <h3>patient name:<%= patient.name %> , Appointments list</h3></th>
+-          </tr>
+-        </thead>
+-        <tbody>
++    <table class="table w   table-primary p   ">
++          <thead>
++            <tr>
++              <th><%@patients.each do |patient| %>
++                  <h3>patient name:<%= patient.name %>,Appointments list</h3></th>
++            </tr>
++          </thead>
++        <tbody class="p">
+           <tr>
+-            <tbody>
+-  <% @patients.each do |patient| %>
+-    <% patient.appointments.each do |appointment| %>
+-      <tr>
+-        <td class="editable-cell" data-attribute="start_date" data-id1="<%= appointment.id %>", data-id2="<%= patient.id%>", data-physician_id="<%= appointment.physician.id %>" >START DATE: <%= appointment.start_date %></td>
+-      </tr>
+-      <tr>
+-        <td class="editable-cell" data-id="<%= appointment.id %>", data-id2="<%= patient.id%>", data-physician_id="<%= appointment.physician.id %>" data-attribute="end_date">END DATE: <%= appointment.end_date %></td>
+-      </tr>
+-      <tr>
+-        <td class="editable-cell" data-id="<%= appointment.id %>", data-id2="<%= patient.id%>", data-physician_id="<%= appointment.physician.id %>" data-attribute="physician_name">DR. NAME: <%= appointment.physician.name if appointment.physician.present? %></td>
+-      </tr>
+-      <tr>
+-        <td class="editable-cell" data-attribute="patient_name" data-id="<%= appointment.id %>", data-id2="<%= patient.id%>", data-physician_id="<%= appointment.physician.id %>" data-attribute="patient_name">PATIENT NAME: <%= appointment.patient.name if appointment.patient.present? %></td>
++          <% @patients.each do |patient| %>
++            <% patient.appointments.each do |appointment| %>
++            </tr>
++        <tr>
++          <th >Start Date</th>
++          <th>End Date</th>
++          <th>Physician Name</th>
++          <th>Patient Name</th>
+       </tr>
+       <tr>
++        <td class="editable-cell " data-attribute="start_date" data-id1="<%= appointment.id %>", data-id2="<%= patient.id%>", data-physician_id="<%= appointment.physician.id %>" > <%= appointment.start_date %></td>
++        <td class="editable-cell" data-id="<%= appointment.id %>", data-id2="<%= patient.id%>", data-physician_id="<%= appointment.physician.id %>" data-attribute="end_date"> <%= appointment.end_date %></td>
++        <td class="editable-cell" data-id="<%= appointment.id %>", data-id2="<%= patient.id%>", data-physician_id="<%= appointment.physician.id %>" data-attribute="physician_name"><%= appointment.physician.name if appointment.physician.present? %></td>
++        <td class="editable-cell" data-attribute="patient_name" data-id="<%= appointment.id %>", data-id2="<%= patient.id%>", data-physician_id="<%= appointment.physician.id %>" data-attribute="patient_name"> <%= appointment.patient.name if appointment.patient.present? %></td>
+         <td>
+           <%#= link_to "Edit Patient", edit_patient_appointment_path(patient.id, appointment.id), remote: true, class: "btn btn-dark" %>
+         </td>
+@@ -127,7 +125,6 @@
+             method: 'PATCH',
+             data: { 
+               appointment: updateData,
+-              // name: newContent,
+               physician_id: physician_id,
+               attr: attribute
+             },
+@@ -157,9 +154,14 @@
+ 
+ <style>
+ .w{
+-  width: 50%;
++ width: 100%;
+ }
+ .wid{
+   width: 25%;
++}
++.p{
++
++padding: 0.5rem rem;
++
+ }
+ </style>
+\ No newline at end of file
+diff --git a/rails-sidekiq b/rails-sidekiq
+--- a/rails-sidekiq
++++ b/rails-sidekiq
+@@ -1 +1 @@
+-Subproject commit 42554d5b86bf4c5b7b8b2706aa529e3803e80512
++Subproject commit 42554d5b86bf4c5b7b8b2706aa529e3803e80512-dirty

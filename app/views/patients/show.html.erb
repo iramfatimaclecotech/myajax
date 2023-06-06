@@ -1,0 +1,128 @@
+<h1>show</h1>
+
+
+
+
+<div>
+    <label class="name">
+        <span>Label 1</span>
+    </label>
+
+    <input id='text_1' class='com_text' type='text' />  
+</div>
+
+<div>       
+    <a href='#' class='edit'>
+        <span>Edit</span>
+    </a>
+
+    <button class='save' type='submit'>Save</button>
+
+    <button class='cancel' type='reset'>Cancel</button> 
+</div>
+<!-- Label one --> 
+<br/>
+<!-- Label two -->
+<div>
+    <label class="name">
+        <span>Label 2</span>
+    </label>
+
+    <input id='text_2' class='com_text' type='text' />  
+</div>
+
+<div>       
+    <a href='#' class='edit'>
+        <span>Edit</span>
+    </a>
+
+    <button class='save' type='submit'>Save</button>
+
+    <button class='cancel' type='reset'>Cancel</button> 
+</div>
+<!-- Label two -->
+<br>
+<!-- Label three -->
+<div>
+    <label class="name">
+        <span>Label 2</span>
+    </label>
+
+    <input id='text_3' class='com_text' type='text' />  
+</div>
+
+<div>       
+    <a href='#' class='edit'>
+        <span>Edit</span>
+    </a>
+
+    <button class='save' type='submit'>Save</button>
+
+    <button class='cancel' type='reset'>Cancel</button> 
+</div>
+<!-- Label three -->
+
+
+
+
+
+
+
+
+<script>
+$(document).ready(function()
+{
+    $('.com_text').click(function()
+    {
+        var com_text = $(this).attr('id');
+    });
+
+    //Edit
+    $('.edit').click(function()
+    { 
+        $(this).hide();
+        $('.name').hide();
+        $('.save,.cancel').show();
+        $(com_text).val($('.name').text().trim()); 
+
+    });
+
+    //Cancel
+    $('.cancel').click(function()
+    { 
+        $(this).hide();
+        $('.name,.edit').show();
+        $('.save').hide();
+        $(com_text).hide();
+        $(com_text).val('');
+
+    });
+
+    //Save
+    $('.save').click(function()
+    { 
+        var sname = $(com_text).val().trim();
+
+        var dataobj = {};
+        dataobj.sid = $(this).attr('data-id');
+        dataobj.sname = sname.trim();
+
+        $.ajax(
+        {
+            type:"POST",
+            dataType:"json",
+            url:"pages/demo.php",
+            cache: false,
+            data: dataobj,
+            success:function(response)
+            {   
+                $('.name').html(sname.trim());
+                $('.name,.edit').show();
+                $('.save,.cancel').hide();
+                $(com_text).hide();
+                $(com_text).val('');                                                            
+            }
+        });
+    });
+});
+</script>

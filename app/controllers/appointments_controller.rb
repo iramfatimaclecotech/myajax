@@ -42,22 +42,20 @@ def edit
 end
 
 def update
-  
   @patient = Patient.find(params[:patient_id])
-  @physician = Physician.find(params[:physician_id])
   @appointment = Appointment.find(params[:id])
   
-  #@appointment.update(appointment_params)
   if params["attr"] == "patient_name"
-    
     @patient.update(name: params["appointment"]["patient"])
-  else
-    @physician&.update(name: params["appointment"]["physician"])
+
+  elsif params["attr"] == "physician_name"
+    @appointment.physician&.update(name: params["appointment"]["physician"])
   end
+  
   if @appointment.update(appointment_params)
     render json: { success: true }
   else
-    render json: { success: false, errors: @user.errors.full_messages }
+    render json: { success: false, errors: @appointment.errors.full_messages }
   end
 end
 

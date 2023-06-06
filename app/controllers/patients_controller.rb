@@ -10,10 +10,10 @@ class PatientsController < ApplicationController
   end
 
   def show
-    @patient = Patient.find(params[:id])
-    respond_to do |format|
-      format.js { flash[:info] = "The user with an name of  has created!" }
-   end
+  #   @patient = Patient.find(params[:id])
+  #   respond_to do |format|
+  #     format.js { flash[:info] = "The user with an name of  has created!" }
+  #  end
   end
 
   def new
